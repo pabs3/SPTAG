@@ -73,10 +73,10 @@ k = 3
 
 def main():
     para = nni.get_next_parameter()
-    cmd_build = "./indexbuilder -d %d -v %s -i data.tsv -o index -a %s -t %d " % (vector_dimension, vector_type, index_algo, threads)
+    cmd_build = "sptag-indexbuilder -d %d -v %s -i data.tsv -o index -a %s -t %d " % (vector_dimension, vector_type, index_algo, threads)
     for p, v in para.items():
         cmd_build += "Index." + p + "=" + str(v)
-    cmd_test = "./indexsearcher index Index.QueryFile=query.tsv Index.TruthFile=truth.txt Index.K=%d" % (k)
+    cmd_test = "sptag-indexsearcher index Index.QueryFile=query.tsv Index.TruthFile=truth.txt Index.K=%d" % (k)
     os.system(cmd_build)
     os.system(cmd_test + " > out.txt")
     with open("out.txt", "r") as fd:
