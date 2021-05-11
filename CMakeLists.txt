@@ -103,7 +103,9 @@ else()
     message (FATAL_ERROR "Could no find openmp!")
 endif()
 
-find_package(Boost 1.66 COMPONENTS system thread serialization wserialization regex filesystem)
+# FIXME: system component is a workaround for boost itself needing it
+#        this can be dropped if upgrading from 1.66 to 1.74 or later
+find_package(Boost 1.66 COMPONENTS system)
 if (Boost_FOUND)
     include_directories (${Boost_INCLUDE_DIR})
     link_directories (${Boost_LIBRARY_DIR})
@@ -112,7 +114,7 @@ if (Boost_FOUND)
     message (STATUS "Library Path: ${Boost_LIBRARY_DIRS}")
     message (STATUS "Library: ${Boost_LIBRARIES}")
 else()
-    message (FATAL_ERROR "Could not find Boost >= 1.67!")
+    message (FATAL_ERROR "Could not find Boost >= 1.66!")
 endif()
 
 option(GPU "GPU" ON)
