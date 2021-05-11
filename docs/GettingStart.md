@@ -3,7 +3,7 @@
 ### **Memory SPTAG Index Build**
  ```bash
  Usage:
- ./IndexBuiler [options]
+ sptag-indexbuilder [options]
  Options:
   -d, --dimension <value>       Dimension of vector, required.
   -v, --vectortype <value>      Input vector data type (e.g. Float, Int8, Int16), required.
@@ -24,7 +24,7 @@
   ### **Memory SPTAG Index Search**
   ```bash
   Usage:
-  ./IndexSearcher [options]
+  sptag-indexsearcher [options]
   Options:
   -d, --dimension <value>       Dimension of vector.
   -v, --vectortype <value>      Input vector data type. Default is float.
@@ -106,11 +106,11 @@ SearchResult=result.txt
 ResultNum=10
 MaxDistRatio=8.0
    ```
-Then run ".\IndexBuilder.exe -c buildconfig.ini -d 128 -v UInt8 -f DEFAULT -i FromFile -o sift1b -a SPANN" to build the index.
+Then run "sptag-indexbuilder -c buildconfig.ini -d 128 -v UInt8 -f DEFAULT -i FromFile -o sift1b -a SPANN" to build the index.
 
-Another build and search combined executable is SSDServing.exe which is used in the paper experiments.
+Another build and search combined executable is sptag-ssdserving which is used in the paper experiments.
 
-For sift1b dataset, use the default configuration below (buildconfig.ini) and run .\SSDServing.exe buildconfig.ini:
+For sift1b dataset, use the default configuration below (buildconfig.ini) and run sptag-ssdserving buildconfig.ini:
 ```
 [Base]
 ValueType=UInt8
@@ -175,7 +175,7 @@ SearchPostingPageLimit=3
 
 ```
 
-For sift1m dataset, use the default configuration below (buildconfig.ini) and run .\SSDServing.exe buildconfig.ini:
+For sift1m dataset, use the default configuration below (buildconfig.ini) and run sptag-ssdserving buildconfig.ini:
 ```
 [Base]
 ValueType=Float
@@ -240,11 +240,11 @@ SearchPostingPageLimit=12
 ```
 
 ### **Quantizer Training and Quantizing Vectors**
-> Use Quantizer.exe to train PQQuantizer and output quantizer & quantized vectors:
+> Use sptag-quantizer to train PQQuantizer and output quantizer & quantized vectors:
 
   ```bash
   Usage:
-  ./Quantizer [options]
+  sptag-quantizer [options]
   Options:
   -d, --dimension <value>                 Dimension of vector.
   -v, --vectortype <value>                Input vector data type. Default is float.
@@ -324,7 +324,7 @@ Note that `num_codebooks*codebook_dim=full_dim`. The current PQ implementation o
 ### **Server**
 ```bash
 Usage:
-./Server [options]
+sptag-server [options]
 Options: 
   -m, --mode <value>              Service mode, interactive or socket.
   -c, --config <value>            Configure file of the index
@@ -351,7 +351,7 @@ IndexFolder=BKT_gist
 ### **Client**
 ```bash
 Usage:
-./Client [options]
+sptag-client [options]
 Options:
 -s, --server                       Server address
 -p, --port                         Server port
@@ -363,7 +363,7 @@ Options:
 ### **Aggregator**
 ```bash
 Usage:
-./Aggregator
+sptag-aggregator
 
 Write Aggregator.ini as follows:
 
