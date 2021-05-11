@@ -44,13 +44,13 @@ if (Python_FOUND)
         set(PY_SUFFIX .so)
     endif()
 
-    execute_process(COMMAND swig -python -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${PROJECT_SOURCE_DIR}/Wrappers/inc/CoreInterface_pwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/PythonCore.i)
-    execute_process(COMMAND swig -python -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface_pwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/PythonClient.i)
+    execute_process(COMMAND swig -python -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${CMAKE_BINARY_DIR}/CoreInterface_pwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/PythonCore.i)
+    execute_process(COMMAND swig -python -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${CMAKE_BINARY_DIR}/ClientInterface_pwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/PythonClient.i)
 
     include_directories(${PYTHON_INCLUDE_PATH} ${PROJECT_SOURCE_DIR}/AnnService ${PROJECT_SOURCE_DIR}/Wrappers)
 
     file(GLOB CORE_HDR_FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/CoreInterface.h)
-    file(GLOB CORE_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/CoreInterface.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/CoreInterface_pwrap.cpp)
+    file(GLOB CORE_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/CoreInterface.cpp ${CMAKE_BINARY_DIR}/CoreInterface_pwrap.cpp)
     add_library (_SPTAG SHARED ${CORE_SRC_FILES} ${CORE_HDR_FILES})
     set_target_properties(_SPTAG PROPERTIES PREFIX "" SUFFIX ${PY_SUFFIX})
     if (CUDA_FOUND)
@@ -58,20 +58,18 @@ if (Python_FOUND)
     else()
         target_link_libraries(_SPTAG SPTAGLibStatic ${Python_LIBRARIES})
     endif()
-    add_custom_command(TARGET _SPTAG POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/Wrappers/inc/SPTAG.py ${EXECUTABLE_OUTPUT_PATH})
 
     file(GLOB CLIENT_HDR_FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Socket/*.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Client/*.h)
-    file(GLOB CLIENT_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/ClientInterface.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Socket/*.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Client/*.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface_pwrap.cpp)
+    file(GLOB CLIENT_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/ClientInterface.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Socket/*.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Client/*.cpp ${CMAKE_BINARY_DIR}/ClientInterface_pwrap.cpp)
     add_library (_SPTAGClient SHARED ${CLIENT_SRC_FILES} ${CLIENT_HDR_FILES})
     set_target_properties(_SPTAGClient PROPERTIES PREFIX "" SUFFIX ${PY_SUFFIX})
     target_link_libraries(_SPTAGClient SPTAGLibStatic ${Python_LIBRARIES} ${Boost_LIBRARIES})
-    add_custom_command(TARGET _SPTAGClient POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/Wrappers/inc/SPTAGClient.py ${EXECUTABLE_OUTPUT_PATH})
 
     install(TARGETS _SPTAG _SPTAGClient
     RUNTIME DESTINATION bin
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib)
-    install(FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/SPTAG.py ${PROJECT_SOURCE_DIR}/Wrappers/inc/SPTAGClient.py DESTINATION bin)
+    install(FILES ${CMAKE_BINARY_DIR}/SPTAG.py ${CMAKE_BINARY_DIR}/SPTAGClient.py DESTINATION bin)
 else()
     message (STATUS "Could not find Python.")
 endif()
@@ -90,34 +88,28 @@ if (JNI_FOUND)
         set (JAVA_SUFFIX .so)
     endif()
 
-    execute_process(COMMAND swig -java -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${PROJECT_SOURCE_DIR}/Wrappers/inc/CoreInterface_jwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/JavaCore.i)
-    execute_process(COMMAND swig -java -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface_jwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/JavaClient.i)
+    execute_process(COMMAND swig -java -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${CMAKE_BINARY_DIR}/CoreInterface_jwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/JavaCore.i)
+    execute_process(COMMAND swig -java -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${CMAKE_BINARY_DIR}/ClientInterface_jwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/JavaClient.i)
 
     include_directories(${JNI_INCLUDE_DIRS} ${PROJECT_SOURCE_DIR}/AnnService ${PROJECT_SOURCE_DIR}/Wrappers)
 
     file(GLOB CORE_HDR_FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/CoreInterface.h)
-    file(GLOB CORE_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/CoreInterface.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/CoreInterface_jwrap.cpp)
+    file(GLOB CORE_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/CoreInterface.cpp ${CMAKE_BINARY_DIR}/CoreInterface_jwrap.cpp)
     add_library (JAVASPTAG SHARED ${CORE_SRC_FILES} ${CORE_HDR_FILES})
     set_target_properties(JAVASPTAG PROPERTIES SUFFIX ${JAVA_SUFFIX})
     target_link_libraries(JAVASPTAG SPTAGLibStatic ${JNI_LIBRARIES})
 
     file(GLOB CLIENT_HDR_FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Socket/*.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Client/*.h)
-    file(GLOB CLIENT_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/ClientInterface.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Socket/*.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Client/*.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface_jwrap.cpp)
+    file(GLOB CLIENT_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/ClientInterface.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Socket/*.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Client/*.cpp ${CMAKE_BINARY_DIR}/ClientInterface_jwrap.cpp)
     add_library (JAVASPTAGClient SHARED ${CLIENT_SRC_FILES} ${CLIENT_HDR_FILES})
     set_target_properties(JAVASPTAGClient PROPERTIES SUFFIX ${JAVA_SUFFIX})
     target_link_libraries(JAVASPTAGClient SPTAGLibStatic ${JNI_LIBRARIES} ${Boost_LIBRARIES})
-
-    file(GLOB JAVA_FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/*.java)
-    foreach(JAVA_FILE ${JAVA_FILES})
-        message (STATUS "Add copy post-command for file " ${JAVA_FILE})
-        add_custom_command(TARGET JAVASPTAGClient POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${JAVA_FILE} ${EXECUTABLE_OUTPUT_PATH})
-    endforeach(JAVA_FILE)
 
     install(TARGETS JAVASPTAG JAVASPTAGClient
     RUNTIME DESTINATION bin
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib)
-    install(FILES ${JAVA_FILES} DESTINATION bin)
+    install(FILES ${CMAKE_BINARY_DIR}/*.java DESTINATION bin)
 else()
     message (STATUS "Could not find JNI.")
 endif()
@@ -155,34 +147,28 @@ if (DOTNET_FOUND)
         set (CSHARP_SUFFIX .so)
     endif()
 
-    execute_process(COMMAND swig -csharp -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${PROJECT_SOURCE_DIR}/Wrappers/inc/CoreInterface_cwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/CsharpCore.i)
-    execute_process(COMMAND swig -csharp -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface_cwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/CsharpClient.i)
+    execute_process(COMMAND swig -csharp -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${CMAKE_BINARY_DIR}/CoreInterface_cwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/CsharpCore.i)
+    execute_process(COMMAND swig -csharp -c++ -I${PROJECT_SOURCE_DIR}/Wrappers/inc -o ${CMAKE_BINARY_DIR}/ClientInterface_cwrap.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/CsharpClient.i)
 
     include_directories(${PROJECT_SOURCE_DIR}/AnnService ${PROJECT_SOURCE_DIR}/Wrappers)
 
     file(GLOB CORE_HDR_FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/CoreInterface.h)
-    file(GLOB CORE_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/CoreInterface.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/CoreInterface_cwrap.cpp)
+    file(GLOB CORE_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/CoreInterface.cpp ${CMAKE_BINARY_DIR}/CoreInterface_cwrap.cpp)
     add_library (CSHARPSPTAG SHARED ${CORE_SRC_FILES} ${CORE_HDR_FILES})
     set_target_properties(CSHARPSPTAG PROPERTIES SUFFIX ${CSHARP_SUFFIX})
     target_link_libraries(CSHARPSPTAG SPTAGLibStatic)
 
     file(GLOB CLIENT_HDR_FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Socket/*.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Client/*.h)
-    file(GLOB CLIENT_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/ClientInterface.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Socket/*.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Client/*.cpp ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface_cwrap.cpp)
+    file(GLOB CLIENT_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/ClientInterface.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Socket/*.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Client/*.cpp ${CMAKE_BINARY_DIR}/ClientInterface_cwrap.cpp)
     add_library (CSHARPSPTAGClient SHARED ${CLIENT_SRC_FILES} ${CLIENT_HDR_FILES})
     set_target_properties(CSHARPSPTAGClient PROPERTIES SUFFIX ${CSHARP_SUFFIX})
     target_link_libraries(CSHARPSPTAGClient SPTAGLibStatic ${Boost_LIBRARIES})
-
-    file(GLOB CSHARP_FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/*.cs)
-    foreach(CSHARP_FILE ${CSHARP_FILES})
-        message (STATUS "Add copy post-command for file " ${CSHARP_FILE})
-        add_custom_command(TARGET CSHARPSPTAGClient POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${CSHARP_FILE} ${EXECUTABLE_OUTPUT_PATH})
-    endforeach(CSHARP_FILE)
 
     install(TARGETS CSHARPSPTAG CSHARPSPTAGClient
     RUNTIME DESTINATION bin
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib)
-    install(FILES ${CSHARP_FILES} DESTINATION bin)
+    install(FILES ${CMAKE_BINARY_DIR}/*.cs DESTINATION bin)
 else()
     message (STATUS "Could not find C#.")
 endif()
