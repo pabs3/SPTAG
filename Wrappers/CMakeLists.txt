@@ -2,7 +2,7 @@
 # Licensed under the MIT License.
 
 
-find_package(Python3 COMPONENTS Development)
+find_package(Python3 COMPONENTS Interpreter Development)
 
 find_package(CUDA)
 
@@ -21,14 +21,18 @@ if (Python3_FOUND)
     link_directories (${Python3_LIBRARY_DIRS})
     set (Python_INCLUDE_DIRS ${Python3_INCLUDE_DIRS})
     set (Python_LIBRARIES ${Python3_LIBRARIES})
+    set (Python_SITELIB ${Python3_SITELIB})
+    set (Python_SITEARCH ${Python3_SITEARCH})
     set (Python_FOUND true)
 else()
-    find_package(Python2 COMPONENTS Development)
+    find_package(Python2 COMPONENTS Interpreter Development)
     if (Python2_FOUND)
         include_directories (${Python2_INCLUDE_DIRS})
         link_directories (${Python2_LIBRARY_DIRS})
         set (Python_INCLUDE_DIRS ${Python2_INCLUDE_DIRS})
         set (Python_LIBRARIES ${Python2_LIBRARIES})
+        set (Python_SITELIB ${Python2_SITELIB})
+        set (Python_SITEARCH ${Python2_SITEARCH})
         set (Python_FOUND true)
     endif()
 endif()
@@ -67,9 +71,9 @@ if (Python_FOUND)
 
     install(TARGETS _SPTAG _SPTAGClient
     RUNTIME DESTINATION bin
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib)
-    install(FILES ${CMAKE_BINARY_DIR}/SPTAG.py ${CMAKE_BINARY_DIR}/SPTAGClient.py DESTINATION bin)
+    ARCHIVE DESTINATION ${Python_SITEARCH}
+    LIBRARY DESTINATION ${Python_SITEARCH})
+    install(FILES ${CMAKE_BINARY_DIR}/SPTAG.py ${CMAKE_BINARY_DIR}/SPTAGClient.py DESTINATION ${Python_SITELIB})
 else()
     message (STATUS "Could not find Python.")
 endif()
