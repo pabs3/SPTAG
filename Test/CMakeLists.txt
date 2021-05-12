@@ -25,4 +25,6 @@ if (NOT LIBRARYONLY)
     file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/Test/src/*.cpp)
     add_executable(SPTAGTest ${TEST_SRC_FILES} ${TEST_HDR_FILES})
     target_link_libraries(SPTAGTest SPTAGLibStatic ssdservingLib ${Boost_LIBRARIES})
+
+    add_test(NAME SPTAGTest COMMAND SPTAGTest)
 endif()
