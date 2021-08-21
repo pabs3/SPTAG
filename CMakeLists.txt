@@ -5,6 +5,9 @@ cmake_minimum_required (VERSION 3.12)
 
 project (SPTAGLib)
 
+set (CMAKE_CXX_STANDARD 14)
+set (CMAKE_CUDA_STANDARD 14)
+
 function(CXX_COMPILER_DUMPVERSION _OUTPUT_VERSION)
   exec_program(${CMAKE_CXX_COMPILER}
     ARGS ${CMAKE_CXX_COMPILER_ARG1} -dumpversion
@@ -23,14 +26,13 @@ if(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
     if (CXX_COMPILER_VERSION VERSION_LESS 5.0)
         message(FATAL_ERROR "GCC version must be at least 5.0!")
     endif()
-    set (CMAKE_CXX_FLAGS "-Wall -Wunreachable-code -Wno-reorder -Wno-sign-compare -Wno-unknown-pragmas -Wcast-align -lm -lrt -std=c++14 -fopenmp")
+    set (CMAKE_CXX_FLAGS "-Wall -Wunreachable-code -Wno-reorder -Wno-sign-compare -Wno-unknown-pragmas -Wcast-align -lm -lrt -fopenmp")
     set (CMAKE_CXX_FLAGS_RELEASE "-DNDEBUG -O3 -march=native")
     set (CMAKE_CXX_FLAGS_DEBUG   "-g -DDEBUG")
 elseif(WIN32)
     if(NOT MSVC14)
          message(FATAL_ERROR "On Windows, only MSVC version 14 are supported!") 
     endif()
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++14")
 
     message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 else ()
