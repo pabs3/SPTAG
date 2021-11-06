@@ -4,6 +4,7 @@
 #include "inc/Core/MetadataSet.h"
 
 #include <string.h>
+#include <mutex>
 #include <shared_mutex>
 
 using namespace SPTAG;
