@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+#include <mutex>
+
 #include "inc/Helper/Concurrent.h"
 
 using namespace SPTAG;

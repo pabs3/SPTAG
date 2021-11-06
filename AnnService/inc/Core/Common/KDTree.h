@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <string>
+#include <mutex>
 #include <shared_mutex>
 
 #include "inc/Core/VectorIndex.h"
