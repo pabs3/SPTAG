@@ -2,10 +2,8 @@
 # Licensed under the MIT License.
 
 set(AnnService ${PROJECT_SOURCE_DIR}/AnnService)
-set(Zstd ${PROJECT_SOURCE_DIR}/ThirdParty/zstd)
 
 include_directories(${AnnService})
-include_directories(${Zstd}/lib)
 
 file(GLOB_RECURSE HDR_FILES ${AnnService}/inc/Core/*.h  ${AnnService}/inc/Helper/*.h)
 file(GLOB_RECURSE SRC_FILES ${AnnService}/src/Core/*.cpp ${AnnService}/src/Helper/*.cpp)
@@ -38,9 +36,9 @@ if(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
 endif()
 
 add_library (SPTAGLib SHARED ${SRC_FILES} ${HDR_FILES})
-target_link_libraries (SPTAGLib DistanceUtils libzstd_shared ${NUMA_LIBRARY})
+target_link_libraries (SPTAGLib DistanceUtils zstd ${NUMA_LIBRARY})
 add_library (SPTAGLibStatic STATIC ${SRC_FILES} ${HDR_FILES})
-target_link_libraries (SPTAGLibStatic DistanceUtils libzstd_static ${NUMA_LIBRARY_STATIC})
+target_link_libraries (SPTAGLibStatic DistanceUtils zstd ${NUMA_LIBRARY_STATIC})
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
     target_compile_options(SPTAGLibStatic PRIVATE -fPIC)
 endif()

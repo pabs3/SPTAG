@@ -118,8 +118,6 @@ endif()
 option(GPU "GPU" ON)
 option(LIBRARYONLY "LIBRARYONLY" OFF)
 
-add_subdirectory (ThirdParty/zstd/build/cmake)
-
 add_subdirectory (AnnService)
 add_subdirectory (Test)
 add_subdirectory (GPUSupport)
