@@ -1,7 +1,7 @@
 ARCH=sm_70
 
 CUDA_HOME=/usr/local/cuda
-FLAGS=-std=c++14 -Xptxas -O3
+FLAGS=-std=c++17 -Xptxas -O3
 
 all: test_dists
 
