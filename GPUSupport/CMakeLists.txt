@@ -29,8 +29,6 @@ if (CUDA_FOUND)
 
     include_directories(${AnnService})
 
-    include_directories(${PROJECT_SOURCE_DIR}/ThirdParty/zstd/lib)   
-
     file(GLOB_RECURSE GPU_HDR_FILES ${AnnService}/inc/Core/*.h  ${AnnService}/inc/Helper/*.h ${AnnService}/inc/Core/Common/cuda/*)
     file(GLOB_RECURSE GPU_SRC_FILES ${AnnService}/src/Core/*.cpp ${AnnService}/src/Helper/*.cpp ${AnnService}/src/Core/Common/Kernel.cu)
 
@@ -54,11 +52,11 @@ if (CUDA_FOUND)
     endif()
 
     CUDA_ADD_LIBRARY(GPUSPTAGLib SHARED ${GPU_SRC_FILES} ${GPU_HDR_FILES})
-    target_link_libraries(GPUSPTAGLib DistanceUtils ${Boost_LIBRARIES} ${CUDA_LIBRARIES} libzstd_shared)
+    target_link_libraries(GPUSPTAGLib DistanceUtils ${Boost_LIBRARIES} ${CUDA_LIBRARIES} zstd)
     target_compile_definitions(GPUSPTAGLib PRIVATE ${Definition})
 
     CUDA_ADD_LIBRARY(GPUSPTAGLibStatic STATIC ${GPU_SRC_FILES} ${GPU_HDR_FILES})
-    target_link_libraries(GPUSPTAGLibStatic DistanceUtils ${Boost_LIBRARIES} ${CUDA_LIBRARIES} libzstd_static)
+    target_link_libraries(GPUSPTAGLibStatic DistanceUtils ${Boost_LIBRARIES} ${CUDA_LIBRARIES} zstd)
     target_compile_definitions(GPUSPTAGLibStatic PRIVATE ${Definition})
     add_dependencies(GPUSPTAGLibStatic GPUSPTAGLib)
 
