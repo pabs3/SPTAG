@@ -44,19 +44,15 @@ namespace SPTAG
 
             static float ComputeL2Distance_SSE(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
             static float ComputeL2Distance_AVX(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
-            static float ComputeL2Distance_AVX512(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
 
             static float ComputeL2Distance_SSE(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
             static float ComputeL2Distance_AVX(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
-            static float ComputeL2Distance_AVX512(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
 
             static float ComputeL2Distance_SSE(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
             static float ComputeL2Distance_AVX(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
-            static float ComputeL2Distance_AVX512(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
 
             static float ComputeL2Distance_SSE(const float* pX, const float* pY, DimensionType length);
             static float ComputeL2Distance_AVX(const float* pX, const float* pY, DimensionType length);
-            static float ComputeL2Distance_AVX512(const float* pX, const float* pY, DimensionType length);
 
             template <typename T>
             static float ComputeCosineDistance(const T* pX, const T* pY, DimensionType length)
@@ -80,19 +76,15 @@ namespace SPTAG
 
             static float ComputeCosineDistance_SSE(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
             static float ComputeCosineDistance_AVX(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX512(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
 
             static float ComputeCosineDistance_SSE(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
             static float ComputeCosineDistance_AVX(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX512(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
 
             static float ComputeCosineDistance_SSE(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
             static float ComputeCosineDistance_AVX(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX512(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
 
             static float ComputeCosineDistance_SSE(const float* pX, const float* pY, DimensionType length);
             static float ComputeCosineDistance_AVX(const float* pX, const float* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX512(const float* pX, const float* pY, DimensionType length);
 
 
             template<typename T>
@@ -123,11 +115,7 @@ namespace SPTAG
             {
             case SPTAG::DistCalcMethod::InnerProduct:
             case SPTAG::DistCalcMethod::Cosine:
-                if (InstructionSet::AVX512())
-                {
-                    return &(DistanceUtils::ComputeCosineDistance_AVX512);
-                }
-                else if (InstructionSet::AVX2() || (isSize4 && InstructionSet::AVX()))
+                if (InstructionSet::AVX2() || (isSize4 && InstructionSet::AVX()))
                 {
                     return &(DistanceUtils::ComputeCosineDistance_AVX);
                 }
@@ -140,11 +128,7 @@ namespace SPTAG
                 }
 
             case SPTAG::DistCalcMethod::L2:
-                if (InstructionSet::AVX512())
-                {
-                    return &(DistanceUtils::ComputeL2Distance_AVX512);
-                }
-                else if (InstructionSet::AVX2() || (isSize4 && InstructionSet::AVX()))
+                if (InstructionSet::AVX2() || (isSize4 && InstructionSet::AVX()))
                 {
                     return &(DistanceUtils::ComputeL2Distance_AVX);
                 }
