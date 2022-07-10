@@ -6,7 +6,12 @@
 using namespace SPTAG;
 using namespace SPTAG::COMMON;
 
-void SIMDUtils::ComputeSum_SSE(std::int8_t* pX, const std::int8_t* pY, DimensionType length)
+SIMDUtils::SIMDUtils()
+{
+        InstructionSet::AVX512();
+}
+
+f_SSE(void SIMDUtils::ComputeSum)(std::int8_t* pX, const std::int8_t* pY, DimensionType length)
 {
     const std::int8_t* pEnd16 = pX + ((length >> 4) << 4);
     const std::int8_t* pEnd1 = pX + length;
@@ -25,7 +30,7 @@ void SIMDUtils::ComputeSum_SSE(std::int8_t* pX, const std::int8_t* pY, Dimension
     }
 }
 
-void SIMDUtils::ComputeSum_AVX(std::int8_t* pX, const std::int8_t* pY, DimensionType length)
+f_AVX(void SIMDUtils::ComputeSum)(std::int8_t* pX, const std::int8_t* pY, DimensionType length)
 {
     const std::int8_t* pEnd16 = pX + ((length >> 4) << 4);
     const std::int8_t* pEnd1 = pX + length;
@@ -44,7 +49,7 @@ void SIMDUtils::ComputeSum_AVX(std::int8_t* pX, const std::int8_t* pY, Dimension
     }
 }
 
-void SIMDUtils::ComputeSum_AVX512(std::int8_t* pX, const std::int8_t* pY, DimensionType length)
+f_AVX512(void SIMDUtils::ComputeSum)(std::int8_t* pX, const std::int8_t* pY, DimensionType length)
 {
     const std::int8_t* pEnd16 = pX + ((length >> 4) << 4);
     const std::int8_t* pEnd1 = pX + length;
@@ -63,7 +68,7 @@ void SIMDUtils::ComputeSum_AVX512(std::int8_t* pX, const std::int8_t* pY, Dimens
     }
 }
 
-void SIMDUtils::ComputeSum_SSE(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length)
+f_SSE(void SIMDUtils::ComputeSum)(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length)
 {
     const std::uint8_t* pEnd16 = pX + ((length >> 4) << 4);
     const std::uint8_t* pEnd1 = pX + length;
@@ -82,7 +87,7 @@ void SIMDUtils::ComputeSum_SSE(std::uint8_t* pX, const std::uint8_t* pY, Dimensi
     }
 }
 
-void SIMDUtils::ComputeSum_AVX(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length)
+f_AVX(void SIMDUtils::ComputeSum)(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length)
 {
     const std::uint8_t* pEnd16 = pX + ((length >> 4) << 4);
     const std::uint8_t* pEnd1 = pX + length;
@@ -101,7 +106,7 @@ void SIMDUtils::ComputeSum_AVX(std::uint8_t* pX, const std::uint8_t* pY, Dimensi
     }
 }
 
-void SIMDUtils::ComputeSum_AVX512(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length)
+f_AVX512(void SIMDUtils::ComputeSum)(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length)
 {
      const std::uint8_t* pEnd16 = pX + ((length >> 4) << 4);
     const std::uint8_t* pEnd1 = pX + length;
@@ -120,7 +125,7 @@ void SIMDUtils::ComputeSum_AVX512(std::uint8_t* pX, const std::uint8_t* pY, Dime
     }
 }
 
-void SIMDUtils::ComputeSum_SSE(std::int16_t* pX, const std::int16_t* pY, DimensionType length)
+f_SSE(void SIMDUtils::ComputeSum)(std::int16_t* pX, const std::int16_t* pY, DimensionType length)
 {
     const std::int16_t* pEnd8 = pX + ((length >> 3) << 3);
     const std::int16_t* pEnd1 = pX + length;
@@ -139,7 +144,7 @@ void SIMDUtils::ComputeSum_SSE(std::int16_t* pX, const std::int16_t* pY, Dimensi
     }
 }
 
-void SIMDUtils::ComputeSum_AVX(std::int16_t* pX, const std::int16_t* pY, DimensionType length)
+f_AVX(void SIMDUtils::ComputeSum)(std::int16_t* pX, const std::int16_t* pY, DimensionType length)
 {
      const std::int16_t* pEnd8 = pX + ((length >> 3) << 3);
     const std::int16_t* pEnd1 = pX + length;
@@ -158,7 +163,7 @@ void SIMDUtils::ComputeSum_AVX(std::int16_t* pX, const std::int16_t* pY, Dimensi
     }
 }
 
-void SIMDUtils::ComputeSum_AVX512(std::int16_t* pX, const std::int16_t* pY, DimensionType length)
+f_AVX512(void SIMDUtils::ComputeSum)(std::int16_t* pX, const std::int16_t* pY, DimensionType length)
 {
      const std::int16_t* pEnd8 = pX + ((length >> 3) << 3);
     const std::int16_t* pEnd1 = pX + length;
@@ -177,7 +182,7 @@ void SIMDUtils::ComputeSum_AVX512(std::int16_t* pX, const std::int16_t* pY, Dime
     }
 }
 
-void SIMDUtils::ComputeSum_SSE(float* pX, const float* pY, DimensionType length)
+f_SSE(void SIMDUtils::ComputeSum)(float* pX, const float* pY, DimensionType length)
 {
     const float* pEnd4= pX + ((length >> 2) << 2);
     const float* pEnd1 = pX + length;
@@ -196,7 +201,7 @@ void SIMDUtils::ComputeSum_SSE(float* pX, const float* pY, DimensionType length)
     } 
 }
 
-void SIMDUtils::ComputeSum_AVX(float* pX, const float* pY, DimensionType length)
+f_AVX(void SIMDUtils::ComputeSum)(float* pX, const float* pY, DimensionType length)
 {
     const float* pEnd4= pX + ((length >> 2) << 2);
     const float* pEnd1 = pX + length;
@@ -215,7 +220,7 @@ void SIMDUtils::ComputeSum_AVX(float* pX, const float* pY, DimensionType length)
     }
 }
 
-void SIMDUtils::ComputeSum_AVX512(float* pX, const float* pY, DimensionType length)
+f_AVX512(void SIMDUtils::ComputeSum)(float* pX, const float* pY, DimensionType length)
 {
     const float* pEnd4= pX + ((length >> 2) << 2);
     const float* pEnd1 = pX + length;
