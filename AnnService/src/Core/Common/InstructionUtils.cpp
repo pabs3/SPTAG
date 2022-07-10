@@ -33,6 +33,15 @@ namespace SPTAG {
                 LOG(Helper::LogLevel::LL_Info, "Using NONE InstructionSet!\n");
         }
 
+#ifndef _MSC_VER
+	f_Naive(void InstructionSet::InstructionSet_Internal::Initialise)(void) {}
+	f_SSE(void InstructionSet::InstructionSet_Internal::Initialise)(void) { HW_SSE = true; }
+	f_SSE2(void InstructionSet::InstructionSet_Internal::Initialise)(void) { HW_SSE2 = true; }
+	f_AVX(void InstructionSet::InstructionSet_Internal::Initialise)(void) { HW_AVX = true; }
+	f_AVX2(void InstructionSet::InstructionSet_Internal::Initialise)(void) { HW_AVX2 = true; }
+	f_AVX512(void InstructionSet::InstructionSet_Internal::Initialise)(void) { HW_AVX512 = true; }
+#endif
+
         // from https://stackoverflow.com/a/7495023/5053214
         InstructionSet::InstructionSet_Internal::InstructionSet_Internal() :
             HW_SSE{ false },
@@ -41,6 +50,7 @@ namespace SPTAG {
             HW_AVX512{ false },
             HW_AVX2{ false }
         {
+#ifdef _MSC_VER
             int info[4];
             cpuid(info, 0);
             int nIds = info[0];
@@ -64,6 +74,9 @@ namespace SPTAG {
 #endif
 #endif
             }
+#else // _MSC_VER
+            Initialise();
+#endif // !_MSC_VER
             if (HW_AVX512)
                 LOG(Helper::LogLevel::LL_Info, "Using AVX512 InstructionSet!\n");
             else if (HW_AVX2)
