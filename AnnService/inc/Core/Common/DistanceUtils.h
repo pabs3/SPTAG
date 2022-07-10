@@ -22,6 +22,8 @@ namespace SPTAG
         class DistanceUtils
         {
         public:
+            DistanceUtils();
+
             template <typename T>
             static float ComputeL2Distance(const T* pX, const T* pY, DimensionType length)
             {
@@ -42,21 +44,34 @@ namespace SPTAG
                 return diff;
             }
 
-            static float ComputeL2Distance_SSE(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
-            static float ComputeL2Distance_AVX(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
-            static float ComputeL2Distance_AVX512(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
+#ifndef _MSC_VER
+            /*
+               GCC cannot yet do target-specific template specialisation.
+               As a workaround add target-specific non-template functions
+               that just call the template functions and hope for inlining.
+               https://gcc.gnu.org/bugzilla/show_bug.cgi?id=81276
+            */
+            f_Naive(static float ComputeL2Distance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length) { return ComputeL2Distance<std::int8_t>(pX, pY, length); }
+            f_Naive(static float ComputeL2Distance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length) { return ComputeL2Distance<std::uint8_t>(pX, pY, length); }
+            f_Naive(static float ComputeL2Distance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length) { return ComputeL2Distance<std::int16_t>(pX, pY, length); }
+            f_Naive(static float ComputeL2Distance)(const float* pX, const float* pY, DimensionType length) { return ComputeL2Distance<float>(pX, pY, length); }
+#endif
 
-            static float ComputeL2Distance_SSE(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
-            static float ComputeL2Distance_AVX(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
-            static float ComputeL2Distance_AVX512(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
+            f_SSE(static float ComputeL2Distance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
+            f_AVX(static float ComputeL2Distance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
+            f_AVX512(static float ComputeL2Distance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
 
-            static float ComputeL2Distance_SSE(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
-            static float ComputeL2Distance_AVX(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
-            static float ComputeL2Distance_AVX512(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
+            f_SSE(static float ComputeL2Distance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
+            f_AVX(static float ComputeL2Distance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
+            f_AVX512(static float ComputeL2Distance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
 
-            static float ComputeL2Distance_SSE(const float* pX, const float* pY, DimensionType length);
-            static float ComputeL2Distance_AVX(const float* pX, const float* pY, DimensionType length);
-            static float ComputeL2Distance_AVX512(const float* pX, const float* pY, DimensionType length);
+            f_SSE(static float ComputeL2Distance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
+            f_AVX(static float ComputeL2Distance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
+            f_AVX512(static float ComputeL2Distance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
+
+            f_SSE(static float ComputeL2Distance)(const float* pX, const float* pY, DimensionType length);
+            f_AVX(static float ComputeL2Distance)(const float* pX, const float* pY, DimensionType length);
+            f_AVX512(static float ComputeL2Distance)(const float* pX, const float* pY, DimensionType length);
 
             template <typename T>
             static float ComputeCosineDistance(const T* pX, const T* pY, DimensionType length)
@@ -78,22 +93,34 @@ namespace SPTAG
                 return base * base - diff;
             }
 
-            static float ComputeCosineDistance_SSE(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX512(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
+#ifndef _MSC_VER
+            /*
+               GCC cannot yet do target-specific template specialisation.
+               As a workaround add target-specific non-template functions
+               that just call the template functions and hope for inlining.
+               https://gcc.gnu.org/bugzilla/show_bug.cgi?id=81276
+            */
+            f_Naive(static float ComputeCosineDistance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length) { return ComputeCosineDistance<std::int8_t>(pX, pY, length); }
+            f_Naive(static float ComputeCosineDistance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length) { return ComputeCosineDistance<std::uint8_t>(pX, pY, length); }
+            f_Naive(static float ComputeCosineDistance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length) { return ComputeCosineDistance<std::int16_t>(pX, pY, length); }
+            f_Naive(static float ComputeCosineDistance)(const float* pX, const float* pY, DimensionType length) { return ComputeCosineDistance<float>(pX, pY, length); }
+#endif
 
-            static float ComputeCosineDistance_SSE(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX512(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
+            f_SSE(static float ComputeCosineDistance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
+            f_AVX(static float ComputeCosineDistance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
+            f_AVX512(static float ComputeCosineDistance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
 
-            static float ComputeCosineDistance_SSE(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX512(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
+            f_SSE(static float ComputeCosineDistance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
+            f_AVX(static float ComputeCosineDistance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
+            f_AVX512(static float ComputeCosineDistance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
 
-            static float ComputeCosineDistance_SSE(const float* pX, const float* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX(const float* pX, const float* pY, DimensionType length);
-            static float ComputeCosineDistance_AVX512(const float* pX, const float* pY, DimensionType length);
+            f_SSE(static float ComputeCosineDistance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
+            f_AVX(static float ComputeCosineDistance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
+            f_AVX512(static float ComputeCosineDistance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
 
+            f_SSE(static float ComputeCosineDistance)(const float* pX, const float* pY, DimensionType length);
+            f_AVX(static float ComputeCosineDistance)(const float* pX, const float* pY, DimensionType length);
+            f_AVX512(static float ComputeCosineDistance)(const float* pX, const float* pY, DimensionType length);
 
             template<typename T>
             static inline float ComputeDistance(const T* p1, const T* p2, DimensionType length, SPTAG::DistCalcMethod distCalcMethod)
@@ -118,11 +145,14 @@ namespace SPTAG
         template<typename T>
         inline DistanceCalcReturn<T> DistanceCalcSelector(SPTAG::DistCalcMethod p_method)
         {
+#ifdef _MSC_VER
             bool isSize4 = (sizeof(T) == 4);
+#endif // _MSC_VER
             switch (p_method)
             {
             case SPTAG::DistCalcMethod::InnerProduct:
             case SPTAG::DistCalcMethod::Cosine:
+#ifdef _MSC_VER
                 if (InstructionSet::AVX512())
                 {
                     return &(DistanceUtils::ComputeCosineDistance_AVX512);
@@ -138,8 +168,12 @@ namespace SPTAG
                 else {
                     return &(DistanceUtils::ComputeCosineDistance);
                 }
+#else // _MSC_VER
+                return &(DistanceUtils::ComputeCosineDistance);
+#endif // !_MSC_VER
 
             case SPTAG::DistCalcMethod::L2:
+#ifdef _MSC_VER
                 if (InstructionSet::AVX512())
                 {
                     return &(DistanceUtils::ComputeL2Distance_AVX512);
@@ -155,6 +189,9 @@ namespace SPTAG
                 else {
                     return &(DistanceUtils::ComputeL2Distance);
                 }
+#else // _MSC_VER
+                return &(DistanceUtils::ComputeL2Distance);
+#endif // !_MSC_VER
 
             default:
                 break;

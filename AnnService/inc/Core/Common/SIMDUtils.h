@@ -14,14 +14,18 @@ namespace SPTAG
 {
     namespace COMMON
     {
+#ifdef _MSC_VER
         template <typename T>
         using SumCalcReturn = void(*)(T*, const T*, DimensionType);
         template<typename T>
         inline SumCalcReturn<T> SumCalcSelector();
+#endif // _MSC_VER
 
         class SIMDUtils
         {
         public:
+            SIMDUtils();
+
             template <typename T>
             static void ComputeSum_Naive(T* pX, const T* pY, DimensionType length)
             {
@@ -31,30 +35,46 @@ namespace SPTAG
                 }
             }
 
-            static void ComputeSum_SSE(std::int8_t* pX, const std::int8_t* pY, DimensionType length);
-            static void ComputeSum_AVX(std::int8_t* pX, const std::int8_t* pY, DimensionType length);
-            static void ComputeSum_AVX512(std::int8_t* pX, const std::int8_t* pY, DimensionType length);
+#ifndef _MSC_VER
+            /*
+               GCC cannot yet do target-specific template specialisation.
+               As a workaround add target-specific non-template functions
+               that just call the template functions and hope for inlining.
+               https://gcc.gnu.org/bugzilla/show_bug.cgi?id=81276
+            */
+            f_Naive(static void ComputeSum)(std::int8_t* pX, const std::int8_t* pY, DimensionType length) { ComputeSum_Naive<std::int8_t>(pX, pY, length); }
+            f_Naive(static void ComputeSum)(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length) { ComputeSum_Naive<std::uint8_t>(pX, pY, length); }
+            f_Naive(static void ComputeSum)(std::int16_t* pX, const std::int16_t* pY, DimensionType length) { ComputeSum_Naive<std::int16_t>(pX, pY, length); }
+            f_Naive(static void ComputeSum)(float* pX, const float* pY, DimensionType length) { ComputeSum_Naive<float>(pX, pY, length); }
+#endif // !_MSC_VER
 
-            static void ComputeSum_SSE(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
-            static void ComputeSum_AVX(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
-            static void ComputeSum_AVX512(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
+            f_SSE(static void ComputeSum)(std::int8_t* pX, const std::int8_t* pY, DimensionType length);
+            f_AVX(static void ComputeSum)(std::int8_t* pX, const std::int8_t* pY, DimensionType length);
+            f_AVX512(static void ComputeSum)(std::int8_t* pX, const std::int8_t* pY, DimensionType length);
 
-            static void ComputeSum_SSE(std::int16_t* pX, const std::int16_t* pY, DimensionType length);
-            static void ComputeSum_AVX(std::int16_t* pX, const std::int16_t* pY, DimensionType length);
-            static void ComputeSum_AVX512(std::int16_t* pX, const std::int16_t* pY, DimensionType length);
+            f_SSE(static void ComputeSum)(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
+            f_AVX(static void ComputeSum)(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
+            f_AVX512(static void ComputeSum)(std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
 
-            static void ComputeSum_SSE(float* pX, const float* pY, DimensionType length);
-            static void ComputeSum_AVX(float* pX, const float* pY, DimensionType length);
-            static void ComputeSum_AVX512(float* pX, const float* pY, DimensionType length);
+            f_SSE(static void ComputeSum)(std::int16_t* pX, const std::int16_t* pY, DimensionType length);
+            f_AVX(static void ComputeSum)(std::int16_t* pX, const std::int16_t* pY, DimensionType length);
+            f_AVX512(static void ComputeSum)(std::int16_t* pX, const std::int16_t* pY, DimensionType length);
 
+            f_SSE(static void ComputeSum)(float* pX, const float* pY, DimensionType length);
+            f_AVX(static void ComputeSum)(float* pX, const float* pY, DimensionType length);
+            f_AVX512(static void ComputeSum)(float* pX, const float* pY, DimensionType length);
+
+#ifdef _MSC_VER
              template<typename T>
             static inline void ComputeSum(T* p1, const T* p2, DimensionType length)
             {
                 auto func = SumCalcSelector<T>();
                 return func(p1, p2, length);
             }
+#endif // _MSC_VER
         };
 
+#ifdef _MSC_VER
         template<typename T>
         inline SumCalcReturn<T> SumCalcSelector()
         {
@@ -73,6 +93,7 @@ namespace SPTAG
             }
             return &(SIMDUtils::ComputeSum_Naive);
         }
+#endif // _MSC_VER
     }
 }
 
