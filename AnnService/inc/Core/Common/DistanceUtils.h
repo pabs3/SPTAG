@@ -60,19 +60,15 @@ namespace SPTAG
 
             f_SSE(static float ComputeL2Distance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
             f_AVX(static float ComputeL2Distance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
-            f_AVX512(static float ComputeL2Distance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
 
             f_SSE(static float ComputeL2Distance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
             f_AVX(static float ComputeL2Distance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
-            f_AVX512(static float ComputeL2Distance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
 
             f_SSE(static float ComputeL2Distance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
             f_AVX(static float ComputeL2Distance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
-            f_AVX512(static float ComputeL2Distance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
 
             f_SSE(static float ComputeL2Distance)(const float* pX, const float* pY, DimensionType length);
             f_AVX(static float ComputeL2Distance)(const float* pX, const float* pY, DimensionType length);
-            f_AVX512(static float ComputeL2Distance)(const float* pX, const float* pY, DimensionType length);
 
             template <typename T>
             static float ComputeCosineDistance(const T* pX, const T* pY, DimensionType length)
@@ -109,19 +105,15 @@ namespace SPTAG
 
             f_SSE(static float ComputeCosineDistance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
             f_AVX(static float ComputeCosineDistance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
-            f_AVX512(static float ComputeCosineDistance)(const std::int8_t* pX, const std::int8_t* pY, DimensionType length);
 
             f_SSE(static float ComputeCosineDistance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
             f_AVX(static float ComputeCosineDistance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
-            f_AVX512(static float ComputeCosineDistance)(const std::uint8_t* pX, const std::uint8_t* pY, DimensionType length);
 
             f_SSE(static float ComputeCosineDistance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
             f_AVX(static float ComputeCosineDistance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
-            f_AVX512(static float ComputeCosineDistance)(const std::int16_t* pX, const std::int16_t* pY, DimensionType length);
 
             f_SSE(static float ComputeCosineDistance)(const float* pX, const float* pY, DimensionType length);
             f_AVX(static float ComputeCosineDistance)(const float* pX, const float* pY, DimensionType length);
-            f_AVX512(static float ComputeCosineDistance)(const float* pX, const float* pY, DimensionType length);
 
             template<typename T>
             static inline float ComputeDistance(const T* p1, const T* p2, DimensionType length, SPTAG::DistCalcMethod distCalcMethod)
