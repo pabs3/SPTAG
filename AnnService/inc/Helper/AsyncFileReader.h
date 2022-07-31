@@ -518,7 +518,7 @@ namespace SPTAG
             {
                 m_fileHandle = open(filePath, O_RDONLY | O_DIRECT);
                 if (m_fileHandle <= 0) {
-                    LOG(LogLevel::LL_Error, "Failed to create file handle: %s\n", filePath);
+                    LOG(LogLevel::LL_Error, "Failed to create file handle: %s: %s\n", filePath, strerror(errno));
                     return false;
                 }
 
