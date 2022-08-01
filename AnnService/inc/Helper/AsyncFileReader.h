@@ -517,6 +517,10 @@ namespace SPTAG
                 std::uint16_t threadPoolSize = 4)
             {
                 m_fileHandle = open(filePath, O_RDONLY | O_DIRECT);
+                // O_DIRECT isn't supported on some filesystems
+                if (m_fileHandle <= 0 && errno == EINVAL) {
+                    m_fileHandle = open(filePath, O_RDONLY);
+                }
                 if (m_fileHandle <= 0) {
                     LOG(LogLevel::LL_Error, "Failed to create file handle: %s: %s\n", filePath, strerror(errno));
                     return false;
