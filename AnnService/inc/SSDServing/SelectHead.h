@@ -955,7 +955,7 @@ namespace SPTAG {
                 }
 
                 SPTAGLIB_LOG(Helper::LogLevel::LL_Info,
-                    "Seleted Nodes: %u, about %.2lf%% of total.\n",
+                    "Selected Nodes: %u, about %.2lf%% of total.\n",
                     static_cast<unsigned int>(selected.size()),
                     selected.size() * 100.0 / vectorSet->Count());
 
