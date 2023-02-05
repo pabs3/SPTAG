@@ -70,7 +70,7 @@ It will generate a Release folder in the code directory which contains all the b
 mkdir build
 cd build && cmake -A x64 ..
 ```
-It will generate a SPTAGLib.sln in the build directory. 
+It will generate an SPTAGLib.sln in the build directory. 
 Compiling the ALL_BUILD project in the Visual Studio (at least 2019) will generate a Release directory which contains all the build targets.
 
 For detailed instructions on installing Windows binaries, please see [here](docs/WindowsInstallation.md)
@@ -88,7 +88,7 @@ Run the SPTAGTest (or Test.exe) in the Release folder to verify all the tests ha
 ### **Usage**
 
 The detailed usage can be found in [Get started](docs/GettingStart.md). There is also an end-to-end tutorial for building vector search online service using Python Wrapper in [Python Tutorial](docs/Tutorial.ipynb).
-The detailed parameters tunning can be found in [Parameters](docs/Parameters.md).
+The detailed parameters tuning can be found in [Parameters](docs/Parameters.md).
 
 ## **References**
 Please cite SPTAG in your publications if it helps your research:

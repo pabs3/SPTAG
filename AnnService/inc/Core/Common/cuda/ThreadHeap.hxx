@@ -67,7 +67,7 @@ class ThreadHeap {
     DistPair<SUMTYPE>* vals;
     DistPair<SUMTYPE> temp;
   
-    // Enforce max-heap property on the entires
+    // Enforce max-heap property on the entries
     __forceinline__ __device__ void heapify() {
       int i=0;
       int swapDest=0;
