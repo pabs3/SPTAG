@@ -68,8 +68,8 @@ struct PacketHeader
     std::uint32_t m_bodyLength;
 
     // Meaning of this is different with different PacketType.
-    // In most request case, it means connection expeced for response.
-    // In most response case, it means connection which handled request.
+    // In most request cases, it means connection expected for response.
+    // In most response cases, it means connection which handled request.
     ConnectionID m_connectionID;
 
     ResourceID m_resourceID;

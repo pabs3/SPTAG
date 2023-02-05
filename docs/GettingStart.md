@@ -484,7 +484,7 @@ if __name__ == '__main__':
 
  ```
 
- > Python Client Wrapper, Suppose there is a sever run at 127.0.0.1:8000 serving ten-dimensional vector datasets:
+ > Python Client Wrapper, Suppose there is a server run at 127.0.0.1:8000 serving ten-dimensional vector datasets:
  ```python
 import SPTAGClient
 import numpy as np

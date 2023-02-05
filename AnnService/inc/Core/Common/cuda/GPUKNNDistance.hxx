@@ -41,7 +41,7 @@ using namespace SPTAG;
 // Templated infinity value
 /*********************************************************************
 * Object representing a Dim-dimensional point, with each coordinate
-* represented by a element of datatype T
+* represented by an element of datatype T
 * NOTE: Dim must be templated so that we can store coordinate values in registers
 *********************************************************************/
 template<typename T, typename SUMTYPE, int Dim>
