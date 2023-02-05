@@ -25,9 +25,9 @@ pip install multiprocess
 
 ## Dataset
 
-We support muiltiple types of data for training. Including text file, binary file and [ann-benchmark](https://github.com/erikbern/ann-benchmarks) format hdf5 file. But the groundturth file should only be texts of index.
+We support multiple types of data for training. Including text file, binary file and [ann-benchmark](https://github.com/erikbern/ann-benchmarks) format hdf5 file. But the groundtruth file should only be texts of index.
 
-In many cased, parameters that works fine in sampled dataset also work in original dataset. So we also provided a preprocessing script for dataset sampling and ground truth calculation. You can use follow command to do sample and ground truth pre-calculate.
+In many cases, parameters that work fine in the sampled dataset also work in the original dataset. So we also provided a preprocessing script for dataset sampling and ground truth calculation. You can use the following command to do sample and ground truth pre-calculate.
 
 ```sh
 python preprocessing.py --train_file victors.bin --query_file query.bin --output_dir sampled/ --distance euclidean  --num_sample 100000
@@ -38,7 +38,7 @@ If you only need to calculate ground truth for time save in auto-tune, which we 
 ## Quickstart
 
 
-Use this command to start a NNI trial to tune SPTAG model on ann-benchmark format hdf5 sift-128-euclidean dataset.
+Use this command to start an NNI trial to tune SPTAG model on ann-benchmark format hdf5 sift-128-euclidean dataset.
 ```sh
 nnictl create --config config.yml
 ```
