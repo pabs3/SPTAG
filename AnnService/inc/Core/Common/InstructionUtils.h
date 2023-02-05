@@ -10,8 +10,11 @@
 
 #ifndef _MSC_VER
 #include <cpuid.h>
-#include <xmmintrin.h>
-#include <immintrin.h>
+#include <simde/x86/sse.h>
+#include <simde/x86/avx.h>
+#include <simde/x86/avx2.h>
+#include <simde/x86/avx512.h>
+SIMDE_DISABLE_UNWANTED_DIAGNOSTICS
 
 void cpuid(int info[4], int InfoType);
 

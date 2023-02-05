@@ -34,7 +34,8 @@ add_library (DistanceUtils STATIC
     )
 
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
-    target_compile_options(DistanceUtils PRIVATE -mavx2 -mavx -msse -msse2 -mavx512f -mavx512bw -mavx512dq -fPIC)
+    target_compile_options(DistanceUtils PRIVATE -fPIC -fopenmp-simd -O3)
+    target_compile_definitions(DistanceUtils PRIVATE SIMDE_ENABLE_NATIVE_ALIASES SIMDE_ENABLE_OPENMP)
 endif()
 
 add_library (SPTAGLib SHARED ${SRC_FILES} ${HDR_FILES})
