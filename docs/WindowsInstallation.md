@@ -18,7 +18,7 @@ Steps to install SWIG:
 
 Boost's precompiled binaries are available at https://sourceforge.net/projects/boost/files/boost-binaries/1.67.0/ (to avoid compiling from scratch) 
 
-1. Select the lastest version for 1.67.0 (boost_1_67_0-msvc-14.1-64.exe)
+1. Select the latest version for 1.67.0 (boost_1_67_0-msvc-14.1-64.exe)
 2. Launch the installation
 3. Add the folder path to PATH environment variable, for instance `C:\Sptag\boost_1_67_0\`
 

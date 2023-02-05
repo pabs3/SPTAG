@@ -43,7 +43,7 @@ def get_recall_from_index(dataset_index, run_index, k):
     for i in range(len(run_index)):
         actual = 0
         for d in run_index[i][:k]:
-            # need to conver to string because default loaded label are strings
+            # need to convert to string because default loaded label are strings
             if str(d) in dataset_index[i][:k]:
                 actual += 1
         recalls[i] = actual
@@ -89,7 +89,7 @@ def main():
     parser.add_argument(
         '--train_file',
         help='the data file to load training points from, '
-        'could be text file, binary flie or ann-benchmark format hdf5 file',
+        'could be text file, binary file or ann-benchmark format hdf5 file',
         default='glove-100-angular.hdf5')
     parser.add_argument(
         '--query_file',
@@ -125,7 +125,7 @@ def main():
     parser.add_argument("--dim",
                         default=100,
                         type=int,
-                        help="the dimention of training vectors")
+                        help="the dimension of training vectors")
     parser.add_argument("--input_type",
                         default="float32",
                         help="the data type of input vectors")
