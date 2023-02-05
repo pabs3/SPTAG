@@ -162,7 +162,7 @@ namespace SPTAG
                 return useDict ? DecompressWithDict(src, srcSize, dst, dstCapacity) : DecompressWithoutDict(src, srcSize, dst, dstCapacity);
             }
 
-            // return the compressed sie
+            // return the compressed size
             size_t GetCompressedSize(const std::string &src, bool useDict)
             {
                 std::string dst = Compress(src, useDict);

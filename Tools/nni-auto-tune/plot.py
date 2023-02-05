@@ -121,5 +121,5 @@ if __name__ == "__main__":
         results = os.listdir(os.path.join("results", args.path))
     else:
         raise FileNotFoundError("No auto tune result found")
-    print("ploting", args.path)
+    print("plotting", args.path)
     create_plot(args.path, args.x_scale, args.y_scale, results)

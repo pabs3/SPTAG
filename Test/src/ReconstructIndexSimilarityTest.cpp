@@ -163,7 +163,7 @@ void GenerateReconstructData(std::shared_ptr<VectorSet>& real_vecset, std::share
     if (fileexists(CODEBOOK_FILE.c_str()) && fileexists("quantest_quan_vector.bin") && fileexists("quantest_rec_vector.bin")) {
         auto ptr = SPTAG::f_createIO();
         if (ptr == nullptr || !ptr->Initialize(CODEBOOK_FILE.c_str(), std::ios::binary | std::ios::in)) {
-            BOOST_ASSERT("Canot Open CODEBOOK_FILE to read!" == "Error");
+            BOOST_ASSERT("Cannot Open CODEBOOK_FILE to read!" == "Error");
         }
         quantizer->LoadIQuantizer(ptr);
         BOOST_ASSERT(quantizer);
@@ -239,13 +239,13 @@ void GenerateReconstructData(std::shared_ptr<VectorSet>& real_vecset, std::share
         quantizer = std::make_shared<SPTAG::COMMON::PQQuantizer<R>>(M, Ks, QuanDim, false, std::move(codebooks));
         auto ptr = SPTAG::f_createIO();
         if (ptr == nullptr || !ptr->Initialize(CODEBOOK_FILE.c_str(), std::ios::binary | std::ios::out)) {
-            BOOST_ASSERT("Canot Open CODEBOOK_FILE to write!" == "Error");
+            BOOST_ASSERT("Cannot Open CODEBOOK_FILE to write!" == "Error");
         }
         quantizer->SaveQuantizer(ptr);
         ptr->ShutDown();
 
         if (!ptr->Initialize(CODEBOOK_FILE.c_str(), std::ios::binary | std::ios::in)) {
-            BOOST_ASSERT("Canot Open CODEBOOK_FILE to read!" == "Error");
+            BOOST_ASSERT("Cannot Open CODEBOOK_FILE to read!" == "Error");
         }
         quantizer->LoadIQuantizer(ptr);
         BOOST_ASSERT(quantizer);

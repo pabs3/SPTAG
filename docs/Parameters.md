@@ -20,7 +20,7 @@ NeighborhoodSize | int | 32 | number of neighbors each node has in the neighborh
 |  ParametersName | type  |  default | definition|
 |---|---|---|---|
 | BKTNumber | int | 1 | number of BKT trees |
-| BKTKMeansK | int | 32 | how many childs each tree node has |
+| BKTKMeansK | int | 32 | how many children each tree node has |
 
 > KDT
 
@@ -57,7 +57,7 @@ NeighborhoodSize | int | 32 | number of neighbors each node has in the neighborh
 
 Prepare vector data file **data.tsv**, query data file **query.tsv**, and truth file **truth.txt** following the format introduced in the [Get Started](GettingStart.md). 
 
-Install [microsoft nni](https://github.com/microsoft/nni) and write the following python code (nni_sptag.py), parameter search space configuration (search_space.json) and nni environment configuration (config.yml).
+Install [microsoft nni](https://github.com/microsoft/nni) and write the following Python code (nni_sptag.py), parameter search space configuration (search_space.json) and nni environment configuration (config.yml).
 
 > nni_sptag.py
 
@@ -148,12 +148,12 @@ trial:
 
 ```
 
-Then start the tuning (tunning results can be found in the Web UI urls in the command output):
+Then start the tuning (tuning results can be found in the Web UI urls in the command output):
 ```bash
 nnictl create --config config.yml
 ```
 
-stop the tunning:
+stop the tuning:
 ```bash
 nnictl stop
 ```

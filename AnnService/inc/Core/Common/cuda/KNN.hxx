@@ -378,7 +378,7 @@ void buildGraphGPU(SPTAG::VectorIndex* index, size_t dataSize, int KVAL, int tre
   PointSet<DTYPE>** d_pointset = new PointSet<DTYPE>*[NUM_GPUS];
 
 
-/**** Varibales if PQ is enabled ****/
+/**** Variables if PQ is enabled ****/
   GPU_Quantizer* d_quantizer = NULL;  // Only use if quantizer is enabled
   GPU_Quantizer* h_quantizer = NULL; 
 
@@ -603,7 +603,7 @@ void buildGraph(SPTAG::VectorIndex* index, int m_iGraphSize, int m_iNeighborhood
 }
 
 
-/****************** DEPRICATED CODE BELOW ***********************/
+/****************** DEPRECATED CODE BELOW ***********************/
 
 /*****************************************************************************************
  * Perform brute-force KNN on each leaf node, where only list of point ids is stored as leafs.
@@ -890,13 +890,13 @@ __host__ void GenerateTruthGPUCore(std::shared_ptr<VectorSet> querySet, std::sha
     auto t1 = std::chrono::high_resolution_clock::now();
     bool done = false;
     bool update = false;
-    //RN, The querys are copied, and the space for result are malloced. 
+    //RN, The queries are copied, and the space for result are malloced. 
     // Need to copy the result, and copy back to host to update. 
-    // The vectors split, malloc, copy neeed to be done in here.
+    // The vectors split, malloc, copy need to be done in here.
     while (!done) { // Continue until all GPUs have completed all of their batches
         size_t freeMem, totalMem;
         CUDA_CHECK(cudaMemGetInfo(&freeMem, &totalMem));
-        SPTAGLIB_LOG(SPTAG::Helper::LogLevel::LL_Debug, "Avaliable Memory out of %lu MiB total Memory for GPU 0 is %lu MiB\n", totalMem / 1000000, freeMem / 1000000);
+        SPTAGLIB_LOG(SPTAG::Helper::LogLevel::LL_Debug, "Available Memory out of %lu MiB total Memory for GPU 0 is %lu MiB\n", totalMem / 1000000, freeMem / 1000000);
 
     // Prep next batch for each GPU
         for (int gpuNum = 0; gpuNum < NUM_GPUS; ++gpuNum) {
@@ -917,7 +917,7 @@ __host__ void GenerateTruthGPUCore(std::shared_ptr<VectorSet> querySet, std::sha
             sub_vectors_points[i] = convertMatrix < DTYPE, SUMTYPE, MAX_DIM >(&vectors[start * dim], curr_batch_size[i], dim);
             CUDA_CHECK(cudaMemcpyAsync(d_check_points[i], sub_vectors_points[i], curr_batch_size[i] * sizeof(Point<DTYPE, SUMTYPE, MAX_DIM>), cudaMemcpyHostToDevice, streams[i]));
             
-            // Perfrom brute-force KNN from the subsets assigned to the GPU for the querySets
+            // Perform brute-force KNN from the subsets assigned to the GPU for the querySets
             int KNN_blocks = (KNN_THREADS - 1 + querySet->Count()) / KNN_THREADS;
             size_t dynamicSharedMem = KNN_THREADS * sizeof(DistPair < SUMTYPE>) * (K - 1); 
             //64*9*8=4608 for K=10 , KNN_Threads = 64
