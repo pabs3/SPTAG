@@ -262,7 +262,7 @@ namespace SPTAG
 #else // sync read
                     auto numRead = indexFile->ReadBinary(totalBytes, buffer, listInfo->listOffset);
                     if (numRead != totalBytes) {
-                        SPTAGLIB_LOG(Helper::LogLevel::LL_Error, "File %s read bytes, expected: %zu, acutal: %llu.\n", m_extraFullGraphFile.c_str(), totalBytes, numRead);
+                        SPTAGLIB_LOG(Helper::LogLevel::LL_Error, "File %s read bytes, expected: %zu, actual: %llu.\n", m_extraFullGraphFile.c_str(), totalBytes, numRead);
                         throw std::runtime_error("File read mismatch");
                     }
                     // decompress posting list
@@ -590,7 +590,7 @@ namespace SPTAG
                         {
                             long long vid = i;
                             if (ptr->WriteBinary(sizeof(vid), reinterpret_cast<char*>(&vid)) != sizeof(vid)) {
-                                SPTAGLIB_LOG(Helper::LogLevel::LL_Error, "Failt to write EmptyReplicaID.bin!");
+                                SPTAGLIB_LOG(Helper::LogLevel::LL_Error, "Failed to write EmptyReplicaID.bin!");
                                 return false;
                             }
                         }

@@ -42,8 +42,8 @@ mkdir build
 cd build && cmake .. && make
 ```
 
-8. Add SPTAG module to python path
+8. Add SPTAG module to Python path
 ```bash
-# so python can find the SPTAG module
+# so Python can find the SPTAG module
 ENV PYTHONPATH=/app/Release
 ```
