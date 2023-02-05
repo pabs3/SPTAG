@@ -130,7 +130,7 @@ class TPtree {
 
     LeafNode* leafs; // size and offset of each leaf node
 
-    int* leaf_points; // IDs of points in each leaf. Only needed if we dont permute.
+    int* leaf_points; // IDs of points in each leaf. Only needed if we don't permute.
 
 
     /************************************************************************************
@@ -379,7 +379,7 @@ __host__ void construct_trees_PQ(TPtree** d_trees, PointSet<T>** ps, int N, int 
         size_t freeMem, totalMem;
         CUDA_CHECK(cudaMemGetInfo(&freeMem, &totalMem));
         size_t neededMem = N*reconDim*sizeof(R);
-        LOG(SPTAG::Helper::LogLevel::LL_Debug, "Memory needed for reconstructed vectors to build TPT: %ld, memory availalbe: %ld\n", neededMem, totalMem);
+        LOG(SPTAG::Helper::LogLevel::LL_Debug, "Memory needed for reconstructed vectors to build TPT: %ld, memory available: %ld\n", neededMem, totalMem);
         if(freeMem*0.9 < neededMem) {
           LOG(SPTAG::Helper::LogLevel::LL_Error, "Insufficient memory for reconstructed vectors to build TPTree.\n");
           exit(1);

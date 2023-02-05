@@ -36,7 +36,7 @@ namespace SPTAG
             void* m_payload;
             bool m_success;
 
-            // Carry exension metadata needed by some DiskIO implementations
+            // Carry extension metadata needed by some DiskIO implementations
             void* m_extension;
 
             AsyncReadRequest() : m_offset(0), m_readSize(0), m_buffer(nullptr), m_status(0), m_payload(nullptr), m_success(false), m_extension(nullptr) {}

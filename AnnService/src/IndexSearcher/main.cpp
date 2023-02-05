@@ -112,7 +112,7 @@ int Process(std::shared_ptr<SearcherOptions> options, VectorIndex& index)
     {
         if (options->m_genTruth) {
             if (dataVectors == nullptr) {
-                LOG(Helper::LogLevel::LL_Error, "Cannot load data vectors to generate groundtruth! Please speicify data vector file by setting -df option.\n");
+                LOG(Helper::LogLevel::LL_Error, "Cannot load data vectors to generate groundtruth! Please specify data vector file by setting -df option.\n");
                 exit(1);
             }
             COMMON::TruthSet::GenerateTruth<T>(queryVectors, dataVectors, options->m_truthFile, index.GetDistCalcMethod(), options->m_truthK,

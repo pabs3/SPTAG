@@ -101,12 +101,12 @@ void deleteArrayOfWrapperArray(void* ptr);
     }
     $result._data = new WrapperArray[combinelen];
     $result._size = combinelen;
-    size_t copyed = 0;
+    size_t copied = 0;
     for (int i = 0; i < nodelen; i++) {
         auto& queryResult = $1->m_allIndexResults[i].m_results;
         for (int j = 0; j < queryResult.GetResultNum(); j++)
-            (((WrapperArray*)$result._data) + copyed + j)->_data = new BasicResult(*(queryResult.GetResult(j)));
-        copyed += queryResult.GetResultNum();
+            (((WrapperArray*)$result._data) + copied + j)->_data = new BasicResult(*(queryResult.GetResult(j)));
+        copied += queryResult.GetResultNum();
     }
 }
 %typemap(csout, excode=SWIGEXCODE) std::shared_ptr<RemoteSearchResult> {
