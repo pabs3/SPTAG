@@ -88,7 +88,7 @@ Run the SPTAGTest (or Test.exe) in the Release folder to verify all the tests ha
 ### **Usage**
 
 The detailed usage can be found in [Get started](docs/GettingStart.md). There is also an end-to-end tutorial for building vector search online service using Python Wrapper in [Python Tutorial](docs/Tutorial.ipynb).
-The detailed parameters tunning can be found in [Parameters](docs/Parameters.md).
+The detailed parameters tuning can be found in [Parameters](docs/Parameters.md).
 
 ## **References**
 Please cite SPTAG in your publications if it helps your research:

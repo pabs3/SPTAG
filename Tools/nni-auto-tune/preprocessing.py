@@ -18,7 +18,7 @@ def main():
     parser.add_argument(
         '--train_file',
         help='the data file to load training points from, '
-        'could be text file, binary flie or ann-benchmark format hdf5 file',
+        'could be text file, binary file or ann-benchmark format hdf5 file',
         default='glove-100-angular.hdf5')
     parser.add_argument(
         '--query_file',
@@ -45,7 +45,7 @@ def main():
     parser.add_argument("--dim",
                         default=100,
                         type=int,
-                        help="the dimention of training vectors")
+                        help="the dimension of training vectors")
     parser.add_argument("--input_type",
                         default="float32",
                         help="the data type of input vectors")
