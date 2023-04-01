@@ -379,7 +379,7 @@ namespace SPTAG
 
             void ListionIOCP(int i)
             {
-                SetThreadAffinity(i, m_fileIocpThreads[i], NumaStrategy::SCATTER, OrderStrategy::DESC); // avoid IO threads overlap with search threads
+                //SetThreadAffinity(i, m_fileIocpThreads[i], NumaStrategy::SCATTER, OrderStrategy::DESC); // avoid IO threads overlap with search threads
 
                 DWORD cBytes;
                 ULONG_PTR key;

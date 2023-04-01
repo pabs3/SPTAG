@@ -10,6 +10,7 @@ namespace SPTAG {
 #ifndef _MSC_VER
         void SetThreadAffinity(int threadID, std::thread& thread, NumaStrategy socketStrategy, OrderStrategy idStrategy)
         {
+/*
 #ifdef NUMA
             int numGroups = numa_num_task_nodes();
             int numCpus = numa_num_task_cpus() / numGroups;
@@ -49,6 +50,7 @@ namespace SPTAG {
                 SPTAGLIB_LOG(Helper::LogLevel::LL_Error, "Error calling pthread_setaffinity_np for thread %d: %d\n", threadID, rc);
             }
 #endif
+*/
         }
 
         struct timespec AIOTimeout {0, 30000};
