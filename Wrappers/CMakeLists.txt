@@ -59,9 +59,9 @@ if (Python_FOUND)
     set_property(TARGET _SPTAG PROPERTY ADDITIONAL_CLEAN_FILES ${CMAKE_BINARY_DIR}/CoreInterface_pwrap.cpp ${CMAKE_BINARY_DIR}/SPTAG.py)
     set_target_properties(_SPTAG PROPERTIES PREFIX "" SUFFIX ${PY_SUFFIX})
     if (CUDA_FOUND)
-        target_link_libraries(_SPTAG GPUSPTAGLib ${Python_LIBRARIES})
+        target_link_libraries(_SPTAG GPUSPTAGLibStatic ${Python_LIBRARIES})
     else()
-        target_link_libraries(_SPTAG SPTAGLib ${Python_LIBRARIES})
+        target_link_libraries(_SPTAG SPTAGLibStatic ${Python_LIBRARIES})
     endif()
 
     file(GLOB CLIENT_HDR_FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Socket/*.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Client/*.h)
@@ -69,7 +69,7 @@ if (Python_FOUND)
     add_library (_SPTAGClient SHARED ${CLIENT_SRC_FILES} ${CLIENT_HDR_FILES})
     set_property(TARGET _SPTAGClient PROPERTY ADDITIONAL_CLEAN_FILES ${CMAKE_BINARY_DIR}/ClientInterface_pwrap.cpp ${CMAKE_BINARY_DIR}/SPTAGClient.py)
     set_target_properties(_SPTAGClient PROPERTIES PREFIX "" SUFFIX ${PY_SUFFIX})
-    target_link_libraries(_SPTAGClient SPTAGLib ${Python_LIBRARIES} ${Boost_LIBRARIES})
+    target_link_libraries(_SPTAGClient SPTAGLibStatic ${Python_LIBRARIES} ${Boost_LIBRARIES})
 
     install(TARGETS _SPTAG _SPTAGClient
     RUNTIME DESTINATION bin
@@ -104,14 +104,14 @@ if (JNI_FOUND)
     add_library (JAVASPTAG SHARED ${CORE_SRC_FILES} ${CORE_HDR_FILES})
     set_property(TARGET JAVASPTAG PROPERTY ADDITIONAL_CLEAN_FILES ${CMAKE_BINARY_DIR}/CoreInterface_jwrap.cpp ${CMAKE_BINARY_DIR}/*.java)
     set_target_properties(JAVASPTAG PROPERTIES SUFFIX ${JAVA_SUFFIX})
-    target_link_libraries(JAVASPTAG SPTAGLib ${JNI_LIBRARIES})
+    target_link_libraries(JAVASPTAG SPTAGLibStatic ${JNI_LIBRARIES})
 
     file(GLOB CLIENT_HDR_FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Socket/*.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Client/*.h)
     file(GLOB CLIENT_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/ClientInterface.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Socket/*.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Client/*.cpp ${CMAKE_BINARY_DIR}/ClientInterface_jwrap.cpp)
     add_library (JAVASPTAGClient SHARED ${CLIENT_SRC_FILES} ${CLIENT_HDR_FILES})
     set_property(TARGET JAVASPTAGClient PROPERTY ADDITIONAL_CLEAN_FILES ${CMAKE_BINARY_DIR}/ClientInterface_jwrap.cpp ${CMAKE_BINARY_DIR}/*.java)
     set_target_properties(JAVASPTAGClient PROPERTIES SUFFIX ${JAVA_SUFFIX})
-    target_link_libraries(JAVASPTAGClient SPTAGLib ${JNI_LIBRARIES} ${Boost_LIBRARIES})
+    target_link_libraries(JAVASPTAGClient SPTAGLibStatic ${JNI_LIBRARIES} ${Boost_LIBRARIES})
 
     install(TARGETS JAVASPTAG JAVASPTAGClient
     RUNTIME DESTINATION bin
@@ -165,14 +165,14 @@ if (DOTNET_FOUND)
     add_library (CSHARPSPTAG SHARED ${CORE_SRC_FILES} ${CORE_HDR_FILES})
     set_property(TARGET CSHARPSPTAG PROPERTY ADDITIONAL_CLEAN_FILES ${CMAKE_BINARY_DIR}/CoreInterface_cwrap.cpp ${CMAKE_BINARY_DIR}/*.cs)
     set_target_properties(CSHARPSPTAG PROPERTIES SUFFIX ${CSHARP_SUFFIX})
-    target_link_libraries(CSHARPSPTAG SPTAGLib)
+    target_link_libraries(CSHARPSPTAG SPTAGLibStatic)
 
     file(GLOB CLIENT_HDR_FILES ${PROJECT_SOURCE_DIR}/Wrappers/inc/ClientInterface.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Socket/*.h ${PROJECT_SOURCE_DIR}/AnnService/inc/Client/*.h)
     file(GLOB CLIENT_SRC_FILES ${PROJECT_SOURCE_DIR}/Wrappers/src/ClientInterface.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Socket/*.cpp ${PROJECT_SOURCE_DIR}/AnnService/src/Client/*.cpp ${CMAKE_BINARY_DIR}/ClientInterface_cwrap.cpp)
     add_library (CSHARPSPTAGClient SHARED ${CLIENT_SRC_FILES} ${CLIENT_HDR_FILES})
     set_property(TARGET CSHARPSPTAGClient PROPERTY ADDITIONAL_CLEAN_FILES ${CMAKE_BINARY_DIR}/ClientInterface_cwrap.cpp ${CMAKE_BINARY_DIR}/*.cs)
     set_target_properties(CSHARPSPTAGClient PROPERTIES SUFFIX ${CSHARP_SUFFIX})
-    target_link_libraries(CSHARPSPTAGClient SPTAGLib ${Boost_LIBRARIES})
+    target_link_libraries(CSHARPSPTAGClient SPTAGLibStatic ${Boost_LIBRARIES})
 
     install(TARGETS CSHARPSPTAG CSHARPSPTAGClient
     RUNTIME DESTINATION bin

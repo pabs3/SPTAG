@@ -126,17 +126,3 @@ DefineTruthFileType(XVEC)
 DefineTruthFileType(DEFAULT)
 
 #endif // DefineTruthFileType
-
-#ifdef DefineNumaStrategy
-
-DefineNumaStrategy(LOCAL)
-DefineNumaStrategy(SCATTER)
-
-#endif // DefineNumaStrategy
-
-#ifdef DefineOrderStrategy
-
-DefineOrderStrategy(ASC)
-DefineOrderStrategy(DESC)
-
-#endif // DefineOrderStrategy

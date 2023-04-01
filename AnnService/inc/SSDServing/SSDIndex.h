@@ -115,39 +115,37 @@ namespace SPTAG {
 
                 Utils::StopW sw;
 
-                for (int i = 0; i < p_numThreads; i++) { threads.emplace_back([&, i]()
+                auto func = [&]()
+                {
+                    Utils::StopW threadws;
+                    size_t index = 0;
+                    while (true)
                     {
-                        NumaStrategy ns = (p_index->GetDiskIndex() != nullptr) ? NumaStrategy::SCATTER : NumaStrategy::LOCAL; // Only for SPANN, we need to avoid IO threads overlap with search threads.
-                        Helper::SetThreadAffinity(i, threads[i], ns, OrderStrategy::ASC); 
-
-                        Utils::StopW threadws;
-                        size_t index = 0;
-                        while (true)
+                        index = queriesSent.fetch_add(1);
+                        if (index < numQueries)
                         {
-                            index = queriesSent.fetch_add(1);
-                            if (index < numQueries)
+                            if ((index & ((1 << 14) - 1)) == 0)
                             {
-                                if ((index & ((1 << 14) - 1)) == 0)
-                                {
-                                    SPTAGLIB_LOG(Helper::LogLevel::LL_Info, "Sent %.2lf%%...\n", index * 100.0 / numQueries);
-                                }
-
-                                double startTime = threadws.getElapsedMs();
-                                p_index->GetMemoryIndex()->SearchIndex(p_results[index]);
-                                double endTime = threadws.getElapsedMs();
-                                p_index->SearchDiskIndex(p_results[index], &(p_stats[index]));
-                                double exEndTime = threadws.getElapsedMs();
-
-                                p_stats[index].m_exLatency = exEndTime - endTime;
-                                p_stats[index].m_totalLatency = p_stats[index].m_totalSearchLatency = exEndTime - startTime;
+                                SPTAGLIB_LOG(Helper::LogLevel::LL_Info, "Sent %.2lf%%...\n", index * 100.0 / numQueries);
                             }
-                            else
-                            {
-                                return;
-                            }
+
+                            double startTime = threadws.getElapsedMs();
+                            p_index->GetMemoryIndex()->SearchIndex(p_results[index]);
+                            double endTime = threadws.getElapsedMs();
+                            p_index->SearchDiskIndex(p_results[index], &(p_stats[index]));
+                            double exEndTime = threadws.getElapsedMs();
+
+                            p_stats[index].m_exLatency = exEndTime - endTime;
+                            p_stats[index].m_totalLatency = p_stats[index].m_totalSearchLatency = exEndTime - startTime;
                         }
-                    });
-                }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                };
+
+                for (int i = 0; i < p_numThreads; i++) { threads.emplace_back(func); }
                 for (auto& thread : threads) { thread.join(); }
 
                 double sendingCost = sw.getElapsedSec();
