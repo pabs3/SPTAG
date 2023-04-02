@@ -84,13 +84,48 @@ namespace SPTAG {
                     for (int i = 0; i < handlers.size(); i++) {
                         if (submitted[i] < iocbs[i].size()) {
                             AsyncFileIO* handler = (AsyncFileIO*)(handlers[i].get());
+                            SPTAGLIB_LOG(
+                                Helper::LogLevel::LL_Error,
+				"i=%d "
+				"io_submit "
+"ctx_id=%lu "
+"nr=%d "
+"data=%lu "
+"key=%u "
+"rw_flags=%u "
+"lio_opcode=%hu "
+"reqprio=%hd "
+"fildes=%u "
+"buf=%lu "
+"nbytes=%lu "
+"offset=%ld "
+"reserved2=%lu "
+"flags=%u "
+"resfd=%u "
+				"\n",
+				i,
+				handler->GetIOCP(channel),
+				iocbs[i].size() - submitted[i],
+(*(iocbs[i].data() + submitted[i]))->aio_data,
+(*(iocbs[i].data() + submitted[i]))->aio_key,
+(*(iocbs[i].data() + submitted[i]))->aio_rw_flags,
+(*(iocbs[i].data() + submitted[i]))->aio_lio_opcode,
+(*(iocbs[i].data() + submitted[i]))->aio_reqprio,
+(*(iocbs[i].data() + submitted[i]))->aio_fildes,
+(*(iocbs[i].data() + submitted[i]))->aio_buf,
+(*(iocbs[i].data() + submitted[i]))->aio_nbytes,
+(*(iocbs[i].data() + submitted[i]))->aio_offset,
+(*(iocbs[i].data() + submitted[i]))->aio_reserved2,
+(*(iocbs[i].data() + submitted[i]))->aio_flags,
+(*(iocbs[i].data() + submitted[i]))->aio_resfd
+			    );
                             int s = syscall(__NR_io_submit, handler->GetIOCP(channel), iocbs[i].size() - submitted[i], iocbs[i].data() + submitted[i]);
                             if (s > 0) {
                                 submitted[i] += s;
                                 totalSubmitted += s;
                             }
                             else {
-                                SPTAGLIB_LOG(Helper::LogLevel::LL_Error, "fid:%d channel %d, to submit:%d, submitted:%s\n", i, channel, iocbs[i].size() - submitted[i], strerror(-s));
+                                SPTAGLIB_LOG(Helper::LogLevel::LL_Error, "fid:%d channel %d, to submit:%d, submitted:%d:%s\n", i, channel, iocbs[i].size() - submitted[i], s, strerror(-s));
                             }
                         }
                     }
