@@ -84,6 +84,9 @@ namespace SPTAG {
                     for (int i = 0; i < handlers.size(); i++) {
                         if (submitted[i] < iocbs[i].size()) {
                             AsyncFileIO* handler = (AsyncFileIO*)(handlers[i].get());
+                            if( (*(iocbs[i].data() + submitted[i]))->aio_reqprio ) {
+                                SPTAGLIB_LOG(Helper::LogLevel::LL_Error, "request priority may be incorrect %hd\n", (*(iocbs[i].data() + submitted[i]))->aio_reqprio);
+                            }
                             int s = syscall(__NR_io_submit, handler->GetIOCP(channel), iocbs[i].size() - submitted[i], iocbs[i].data() + submitted[i]);
                             if (s > 0) {
                                 submitted[i] += s;
