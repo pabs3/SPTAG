@@ -111,15 +111,14 @@ namespace SPTAG {
 
                 std::vector<std::thread> threads;
 
+                NumaStrategy ns = (p_index->GetDiskIndex() != nullptr) ? NumaStrategy::SCATTER : NumaStrategy::LOCAL; // Only for SPANN, we need to avoid IO threads overlap with search threads.
+
                 SPTAGLIB_LOG(Helper::LogLevel::LL_Info, "Searching: numThread: %d, numQueries: %d.\n", p_numThreads, numQueries);
 
                 Utils::StopW sw;
 
                 for (int i = 0; i < p_numThreads; i++) { threads.emplace_back([&, i]()
                     {
-                        NumaStrategy ns = (p_index->GetDiskIndex() != nullptr) ? NumaStrategy::SCATTER : NumaStrategy::LOCAL; // Only for SPANN, we need to avoid IO threads overlap with search threads.
-                        Helper::SetThreadAffinity(i, threads[i], ns, OrderStrategy::ASC); 
-
                         Utils::StopW threadws;
                         size_t index = 0;
                         while (true)
@@ -147,6 +146,7 @@ namespace SPTAG {
                             }
                         }
                     });
+                    Helper::SetThreadAffinity(i, threads.back(), ns, OrderStrategy::ASC);
                 }
                 for (auto& thread : threads) { thread.join(); }
 

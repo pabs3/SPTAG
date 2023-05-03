@@ -189,13 +189,12 @@ int Process(std::shared_ptr<SearcherOptions> options, VectorIndex& index)
             std::atomic_size_t queriesSent(0);
             std::vector<std::thread> threads;
 
+            NumaStrategy ns = (index.GetIndexAlgoType() == IndexAlgoType::SPANN)? NumaStrategy::SCATTER: NumaStrategy::LOCAL; // Only for SPANN, we need to avoid IO threads overlap with search threads.
+
             auto batchstart = std::chrono::high_resolution_clock::now();
 
             for (std::uint32_t i = 0; i < options->m_threadNum; i++) { 
                 threads.emplace_back([&, i] {
-                    NumaStrategy ns = (index.GetIndexAlgoType() == IndexAlgoType::SPANN)? NumaStrategy::SCATTER: NumaStrategy::LOCAL; // Only for SPANN, we need to avoid IO threads overlap with search threads.
-                    Helper::SetThreadAffinity(i, threads[i], ns, OrderStrategy::ASC);
-
                     size_t qid = 0;
                     while (true)
                     {
@@ -213,6 +212,7 @@ int Process(std::shared_ptr<SearcherOptions> options, VectorIndex& index)
                         }
                     }
                 });
+                Helper::SetThreadAffinity(i, threads.back(), ns, OrderStrategy::ASC);
             }
             for (auto& thread : threads) { thread.join(); }
 
