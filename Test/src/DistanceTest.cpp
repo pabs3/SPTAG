@@ -5,6 +5,8 @@
 #include <ctime>
 #include <thread>
 #include <vector>
+#include <cstdint>
+
 #include "inc/Test.h"
 #include "inc/Core/Common/DistanceUtils.h"
 

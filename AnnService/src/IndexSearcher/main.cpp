@@ -17,6 +17,7 @@
 #include <ctime>
 #include <thread>
 #include <chrono>
+#include <cstdint>
 
 using namespace SPTAG;
 

@@ -3,6 +3,8 @@
 #include <inc/Core/Common/OPQQuantizer.h>
 #include <inc/Helper/StringConvert.h>
 
+#include <cstdint>
+
 namespace SPTAG
 {
     namespace COMMON

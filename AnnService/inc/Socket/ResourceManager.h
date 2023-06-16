@@ -16,6 +16,7 @@
 #include <deque>
 #include <unordered_map>
 #include <thread>
+#include <cstdint>
 
 namespace std
 {

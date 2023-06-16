@@ -3,6 +3,8 @@
 
 #include "inc/Helper/AsyncFileReader.h"
 
+#include <cstdint>
+
 namespace SPTAG {
     namespace Helper {
 #ifndef _MSC_VER

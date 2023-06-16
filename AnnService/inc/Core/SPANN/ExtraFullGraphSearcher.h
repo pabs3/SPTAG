@@ -15,6 +15,7 @@
 #include <climits>
 #include <future>
 #include <numeric>
+#include <cstdint>
 
 namespace SPTAG
 {

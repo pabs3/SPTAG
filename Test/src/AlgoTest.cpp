@@ -8,6 +8,7 @@
 
 #include <unordered_set>
 #include <chrono>
+#include <cstdint>
 
 template <typename T>
 void Build(SPTAG::IndexAlgoType algo, std::string distCalcMethod, std::shared_ptr<SPTAG::VectorSet>& vec, std::shared_ptr<SPTAG::MetadataSet>& meta, const std::string out)

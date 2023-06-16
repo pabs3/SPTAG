@@ -6,6 +6,8 @@
 
 #include "inc/Helper/VectorSetReader.h"
 
+#include <cstdint>
+
 namespace SPTAG
 {
     namespace Helper

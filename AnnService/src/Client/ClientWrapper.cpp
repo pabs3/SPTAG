@@ -3,6 +3,8 @@
 
 #include "inc/Client/ClientWrapper.h"
 
+#include <cstdint>
+
 using namespace SPTAG;
 using namespace SPTAG::Socket;
 using namespace SPTAG::Client;

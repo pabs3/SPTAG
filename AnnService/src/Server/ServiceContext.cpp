@@ -6,6 +6,8 @@
 #include "inc/Helper/CommonHelper.h"
 #include "inc/Helper/StringConvert.h"
 
+#include <cstdint>
+
 using namespace SPTAG;
 using namespace SPTAG::Service;
 

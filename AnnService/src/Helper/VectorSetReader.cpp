@@ -6,6 +6,8 @@
 #include "inc/Helper/VectorSetReaders/TxtReader.h"
 #include "inc/Helper/VectorSetReaders/XvecReader.h"
 
+#include <cstdint>
+
 using namespace SPTAG;
 using namespace SPTAG::Helper;
 

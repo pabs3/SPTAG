@@ -14,6 +14,7 @@
 #include <chrono>
 #include <queue>
 #include <atomic>
+#include <cstdint>
 
 #if defined(GPU)
 #include <cuda.h>

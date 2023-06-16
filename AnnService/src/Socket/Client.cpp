@@ -4,6 +4,7 @@
 #include "inc/Socket/Client.h"
 
 #include <limits>
+#include <cstdint>
 
 using namespace SPTAG::Socket;
 

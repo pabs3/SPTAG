@@ -5,6 +5,7 @@
 #include "inc/Helper/SimpleIniReader.h"
 
 #include <fstream>
+#include <cstdint>
 
 using namespace SPTAG;
 using namespace SPTAG::Aggregator;

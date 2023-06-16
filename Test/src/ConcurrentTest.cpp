@@ -9,6 +9,7 @@
 #include <thread>
 #include <unordered_set>
 #include <ctime>
+#include <cstdint>
 
 template <typename T>
 void ConcurrentAddSearchSave(SPTAG::IndexAlgoType algo, std::string distCalcMethod, std::shared_ptr<SPTAG::VectorSet>& vec, std::shared_ptr<SPTAG::MetadataSet>& meta, const std::string out)

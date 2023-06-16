@@ -6,6 +6,7 @@
 
 #include <cctype>
 #include <functional>
+#include <cstdint>
 
 using namespace SPTAG;
 using namespace SPTAG::Helper;

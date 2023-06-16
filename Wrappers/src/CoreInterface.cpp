@@ -4,6 +4,8 @@
 #include "inc/CoreInterface.h"
 #include "inc/Helper/StringConvert.h"
 
+#include <cstdint>
+
 
 AnnIndex::AnnIndex(DimensionType p_dimension)
     : m_algoType(SPTAG::IndexAlgoType::BKT),

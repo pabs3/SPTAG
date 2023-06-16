@@ -3,6 +3,8 @@
 
 #include "inc/Helper/Concurrent.h"
 
+#include <cstdint>
+
 using namespace SPTAG;
 using namespace SPTAG::Helper::Concurrent;
 

@@ -3,6 +3,7 @@
 
 #include "inc/Core/KDT/Index.h"
 #include <chrono>
+#include <cstdint>
 
 #pragma warning(disable:4242)  // '=' : conversion from 'int' to 'short', possible loss of data
 #pragma warning(disable:4244)  // '=' : conversion from 'int' to 'short', possible loss of data

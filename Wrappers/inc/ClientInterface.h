@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include <atomic>
 #include <mutex>
+#include <cstdint>
 
 class AnnClient
 {

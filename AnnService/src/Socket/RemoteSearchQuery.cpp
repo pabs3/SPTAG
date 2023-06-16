@@ -4,6 +4,8 @@
 #include "inc/Socket/RemoteSearchQuery.h"
 #include "inc/Socket/SimpleSerialization.h"
 
+#include <cstdint>
+
 using namespace SPTAG;
 using namespace SPTAG::Socket;
 

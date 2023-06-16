@@ -5,6 +5,8 @@
 #include <thread>
 #include <cstdlib>
 #include <algorithm>
+#include <cstdint>
+
 #include "inc/Core/Common/DistanceUtils.h"
 #include "inc/Core/Common/Dataset.h"
 #include "inc/Core/Common/BKTree.h"

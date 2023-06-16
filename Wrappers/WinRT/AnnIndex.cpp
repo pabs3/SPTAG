@@ -5,6 +5,8 @@
 #endif
 #include "SearchResult.g.cpp"
 
+#include <cstdint>
+
 namespace winrt::SPTAG::implementation
 {
   template<typename T, typename = std::enable_if_t<std::is_pod_v<T>>>

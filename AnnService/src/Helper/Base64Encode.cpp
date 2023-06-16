@@ -3,6 +3,8 @@
 
 #include "inc/Helper/Base64Encode.h"
 
+#include <cstdint>
+
 using namespace SPTAG;
 using namespace SPTAG::Helper;
 

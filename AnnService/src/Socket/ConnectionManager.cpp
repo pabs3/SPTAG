@@ -3,6 +3,8 @@
 
 #include "inc/Socket/ConnectionManager.h"
 
+#include <cstdint>
+
 using namespace SPTAG::Socket;
 
 

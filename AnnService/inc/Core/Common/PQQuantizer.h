@@ -13,6 +13,7 @@
 #include <memory>
 #include <cassert>
 #include <cstring>
+#include <cstdint>
 
 
 namespace SPTAG

@@ -5,6 +5,7 @@
 #include "inc/Helper/CommonHelper.h"
 
 #include <time.h>
+#include <cstdint>
 
 using namespace SPTAG;
 using namespace SPTAG::Helper;

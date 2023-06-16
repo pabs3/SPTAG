@@ -10,6 +10,7 @@
 #include "MetadataSet.h"
 #include "inc/Helper/SimpleIniReader.h"
 #include <unordered_set>
+#include <cstdint>
 #include "inc/Core/Common/IQuantizer.h"
 #include "inc/Core/Common/WorkSpace.h"
 
