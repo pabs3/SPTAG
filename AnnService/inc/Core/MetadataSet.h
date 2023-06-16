@@ -6,6 +6,8 @@
 
 #include "CommonDataStructure.h"
 
+#include <cstdint>
+
 namespace SPTAG
 {
 

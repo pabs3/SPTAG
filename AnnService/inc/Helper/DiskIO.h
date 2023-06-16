@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string.h>
 #include <memory>
+#include <cstdint>
 
 namespace SPTAG
 {

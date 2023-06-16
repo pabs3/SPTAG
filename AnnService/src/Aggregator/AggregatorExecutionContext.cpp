@@ -3,6 +3,8 @@
 
 #include "inc/Aggregator/AggregatorExecutionContext.h"
 
+#include <cstdint>
+
 using namespace SPTAG;
 using namespace SPTAG::Aggregator;
 

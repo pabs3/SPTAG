@@ -13,6 +13,7 @@
 #include <iostream>
 #include <unordered_set>
 #include <ctime>
+#include <cstdint>
 
 using namespace SPTAG;
 

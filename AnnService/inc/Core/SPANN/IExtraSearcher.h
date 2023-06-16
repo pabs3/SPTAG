@@ -13,6 +13,7 @@
 #include <vector>
 #include <chrono>
 #include <atomic>
+#include <cstdint>
 
 namespace SPTAG {
     namespace SPANN {

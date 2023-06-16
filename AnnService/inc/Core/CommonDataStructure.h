@@ -6,6 +6,8 @@
 
 #include "inc/Core/Common.h"
 
+#include <cstdint>
+
 namespace SPTAG
 {
 

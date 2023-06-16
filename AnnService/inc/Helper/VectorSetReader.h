@@ -10,6 +10,7 @@
 #include "inc/Helper/ArgumentsParser.h"
 
 #include <memory>
+#include <cstdint>
 
 namespace SPTAG
 {

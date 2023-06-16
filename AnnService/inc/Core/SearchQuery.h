@@ -7,6 +7,7 @@
 #include "SearchResult.h"
 
 #include <cstring>
+#include <cstdint>
 
 namespace SPTAG
 {

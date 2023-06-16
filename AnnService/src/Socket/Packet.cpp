@@ -5,6 +5,7 @@
 #include "inc/Socket/SimpleSerialization.h"
 
 #include <type_traits>
+#include <cstdint>
 
 using namespace SPTAG::Socket;
 

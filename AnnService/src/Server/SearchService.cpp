@@ -8,6 +8,7 @@
 #include "inc/Helper/ArgumentsParser.h"
 
 #include <iostream>
+#include <cstdint>
 
 using namespace SPTAG;
 using namespace SPTAG::Service;

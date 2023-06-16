@@ -9,6 +9,7 @@
 #include "inc/Quantizer/Training.h"
 
 #include <memory>
+#include <cstdint>
 
 using namespace SPTAG;
 

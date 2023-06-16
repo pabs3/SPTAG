@@ -3,6 +3,8 @@
 
 #include "inc/CLRCoreInterface.h"
 
+#include <cstdint>
+
 
 namespace Microsoft
 {

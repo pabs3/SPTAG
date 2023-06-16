@@ -6,6 +6,7 @@
 #include <string.h>
 #include <mutex>
 #include <shared_mutex>
+#include <cstdint>
 
 using namespace SPTAG;
 

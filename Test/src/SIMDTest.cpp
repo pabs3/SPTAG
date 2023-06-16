@@ -3,6 +3,8 @@
 
 // #include <bitset>
 #include <vector>
+#include <cstdint>
+
 #include "inc/Test.h"
 #include "inc/Core/Common/SIMDUtils.h"
 

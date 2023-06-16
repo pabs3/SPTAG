@@ -5,6 +5,8 @@
 #define _SPTAG_COMMON_LABELSET_H_
 
 #include <atomic>
+#include <cstdint>
+
 #include "Dataset.h"
 
 namespace SPTAG

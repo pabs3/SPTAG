@@ -13,6 +13,7 @@
 #include <cctype>
 #include <limits>
 #include <cerrno>
+#include <cstdint>
 
 namespace SPTAG
 {

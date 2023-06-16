@@ -7,6 +7,7 @@
 #include "inc/Helper/Logging.h"
 #include <stdexcept>
 #include <sstream>
+#include <cstdint>
 
 namespace SPTAG
 {

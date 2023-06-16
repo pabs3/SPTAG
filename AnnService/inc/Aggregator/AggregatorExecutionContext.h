@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <atomic>
+#include <cstdint>
 
 namespace SPTAG
 {

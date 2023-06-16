@@ -5,6 +5,8 @@
 
 #include "PQQuantizer.h"
 
+#include <cstdint>
+
 #if (__cplusplus < 201703L)
 #define ISNOTSAME(A, B) if (!std::is_same<A, B>::value)
 #else

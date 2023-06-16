@@ -8,6 +8,7 @@
 #include "inc/Helper/StringConvert.h"
 
 #include <boost/asio.hpp>
+#include <cstdint>
 
 
 AnnClient::AnnClient(const char* p_serverAddr, const char* p_serverPort)

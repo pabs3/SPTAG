@@ -4,6 +4,8 @@
 #include "inc/Helper/VectorSetReaders/DefaultReader.h"
 #include "inc/Helper/CommonHelper.h"
 
+#include <cstdint>
+
 using namespace SPTAG;
 using namespace SPTAG::Helper;
 

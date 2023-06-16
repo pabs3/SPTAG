@@ -11,6 +11,8 @@
 #include "inc/Core/KDT/Index.h"
 #include "inc/Core/SPANN/Index.h"
 
+#include <cstdint>
+
 typedef typename SPTAG::Helper::Concurrent::ConcurrentMap<std::string, SPTAG::SizeType> MetadataMap;
 
 using namespace SPTAG;

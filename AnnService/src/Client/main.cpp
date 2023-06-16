@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <atomic>
 #include <iostream>
+#include <cstdint>
 
 using namespace SPTAG;
 

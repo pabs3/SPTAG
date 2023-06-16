@@ -6,6 +6,7 @@
 
 #include <functional>
 #include <iostream>
+#include <cstdint>
 
 #include "CommonUtils.h"
 #include "InstructionUtils.h"

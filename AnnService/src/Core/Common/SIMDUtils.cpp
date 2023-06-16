@@ -3,6 +3,8 @@
 
 #include "inc/Core/Common/SIMDUtils.h"
 
+#include <cstdint>
+
 using namespace SPTAG;
 using namespace SPTAG::COMMON;
 

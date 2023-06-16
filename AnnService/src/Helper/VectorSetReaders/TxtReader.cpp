@@ -6,6 +6,7 @@
 #include "inc/Helper/CommonHelper.h"
 
 #include <omp.h>
+#include <cstdint>
 
 using namespace SPTAG;
 using namespace SPTAG::Helper;
