@@ -56,7 +56,7 @@ if (CUDA_FOUND)
     target_compile_definitions(GPUSPTAGLib PRIVATE ${Definition})
 
     CUDA_ADD_LIBRARY(GPUSPTAGLibStatic STATIC ${GPU_SRC_FILES} ${GPU_HDR_FILES})
-    target_link_libraries(GPUSPTAGLibStatic DistanceUtils ${Boost_LIBRARIES} ${CUDA_LIBRARIES} zstd ${NUMA_LIBRARY_STATIC})
+    target_link_libraries(GPUSPTAGLibStatic DistanceUtils ${Boost_LIBRARIES} ${CUDA_LIBRARIES} zstd ${NUMA_LIBRARY})
     target_compile_definitions(GPUSPTAGLibStatic PRIVATE ${Definition})
     add_dependencies(GPUSPTAGLibStatic GPUSPTAGLib)
 
